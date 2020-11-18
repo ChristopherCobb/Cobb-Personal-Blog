@@ -7,9 +7,6 @@ const Navbar: React.FC<INavbarProps> = () => {
             <div className="container">
                 <Link to="/" className="navbar-brand text-white"> -- Christopher's Blog -- </Link>
                 <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <Link className="nav-link text-white mx-4" to="/"> -- Home -- <span className="sr-only">(current)</span></Link>
-                    </li>
                     <li className="nav-item">
                         <Link className="nav-link text-white" to="/blogs/add">-- New Blog Entry --</Link>
                     </li>

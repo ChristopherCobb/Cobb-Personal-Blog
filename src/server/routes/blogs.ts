@@ -1,5 +1,4 @@
 import * as express from "express";
-import { createTextSpanFromBounds } from "typescript";
 import DB from "../db";
 
 const router = express.Router();
@@ -54,9 +53,8 @@ router.post("/", async (req: express.Request, res: express.Response) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    res.json(
-      await DB.Blogs.update(req.body.title, req.body.content, req.body.id)
-    );
+   console.log(req.body)
+    res.send(await DB.Blogs.update(req.body.content, req.params.id));
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

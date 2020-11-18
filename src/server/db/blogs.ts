@@ -18,7 +18,7 @@ export const all = async () => {
 export const one = async (id: number) => {
   return new Promise((resolve, reject) => {
     Connection.query(
-      `SELECT * from blogs WHERE id = ?`,
+      `select a.*, b.* from blogs b inner join authors a on a.id = b.authorid where b.id = ?`,
       [id],
       (err, results) => {
         if (err) {
@@ -37,8 +37,8 @@ const post = (title: string, content: string, authorid: number) =>
     Number(authorid),
   ]);
 
-const update = (title: string, content: string, id: number) =>
-  Query(`UPDATE blogs SET title = ?, SET content = ? WHERE id = ?;`, [title, content, id]);
+const update = (content: string, id: string) =>
+  Query(`UPDATE Blogs SET content = ? WHERE id = ?;`, [content, id]);
 
 const destroy = (id: number) => Query('DELETE FROM Blogs WHERE id = ?', [id]);
 
