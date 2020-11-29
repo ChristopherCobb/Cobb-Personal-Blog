@@ -1,15 +1,20 @@
-import { Query } from './index';
+// import { Query } from './index';
 
-interface TBlogTags {
-    blogid: number;
-    tagid: number
-}
+// interface TBlogTags {
+//     blogid: number;
+//     tagid: number
+// }
 
-const all = () => Query(`SELECT blogs.* FROM Blogs JOIN Authors ON Authors.id = Blogs.authorid`);
+// const all = () => Query(`SELECT blogs.* FROM Blogs JOIN Authors ON Authors.id = Blogs.authorid`);
 
-const post = (blogid: number, tagid: number) => Query(`INSERT INTO BlogTags (blogid, tagid) VALUE (?, ?);`, [blogid, tagid]);
+// const post = (blogid: number, tagid: number) => Query(`INSERT INTO BlogTags (blogid, tagid) VALUE (?, ?);`, [blogid, tagid]);
 
-export default {
-    all,
-    post
-}
+// const insert = (blogid: number, tags:[]) => {
+//     tags.forEach(tag => Query(
+//         `insert into blogtags (blogid, tagid) values (?,?)`, [blogid, tag]
+//     ))
+// }
+// export default {
+//     all,
+//     post
+// }

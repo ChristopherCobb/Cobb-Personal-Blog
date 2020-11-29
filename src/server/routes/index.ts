@@ -1,9 +1,12 @@
 import * as express from "express";
-import blogsRouter from "./blogs"
+import authRouter from "./auth";
+import apiRouter from "./api";
 
 
-let router = express.Router();
+const router = express.Router();
 
-router.use("/blogs",blogsRouter);
+router.use('/api', apiRouter)
+router.use('/auth', authRouter)
+
 
 export default router;

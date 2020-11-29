@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { IBlogProps } from "../utils/types";
 import * as moment from "moment";
 
-const OneBlog: React.FC<IBlogProps> = (props: IBlogProps) => {
+const OneBlog: React.FC<SingleBlogProps> = (props: SingleBlogProps) => {
   const [blog, setBlog] = useState<IBlogProps>({
     id: 0,
     title: "",
     content: "",
-    authorid: 0,
+    authorid: null,
     _created: 0,
     name: "",
   });
@@ -66,5 +66,8 @@ const OneBlog: React.FC<IBlogProps> = (props: IBlogProps) => {
     </div>
   );
 };
+
+
+interface SingleBlogProps extends RouteComponentProps<{ id: string }> { }
 
 export default OneBlog;

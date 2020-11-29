@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { IBlogProps } from "../utils/types";
+import { IBlogProps} from "../utils/types";
 
 const NewBlog: React.FC<IBlogProps> = (props) => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [tags, setTags] = useState<([])>([])
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ const NewBlog: React.FC<IBlogProps> = (props) => {
       title: title,
       content: content,
       email: email,
+      tags: []
     };
 
     let res = await fetch("/api/blogs", {

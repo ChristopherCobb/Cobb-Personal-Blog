@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as moment from "moment";
 import type { IBlogProps } from "../.././client/utils/types";
 
-const Timeline: React.FC<IBlogProps> = () => {
+const Timeline: React.FC<HomeProps> = (props:HomeProps) => {
   const [blogs, setBlogs] = useState<IBlogProps[]>([]);
 
   React.useEffect(() => {
@@ -24,7 +24,7 @@ const Timeline: React.FC<IBlogProps> = () => {
 
   return (
     <section className="row" id="row1">
-      {blogs.map((blog: IBlogProps) => (
+      {blogs.map((blog => (
         <div
           key={blog.id}
           className="card d-flex justify-content-center align-items-center shadow text-center m-4 rounded text-dark"
@@ -54,17 +54,17 @@ const Timeline: React.FC<IBlogProps> = () => {
             </h5>
           </div>
         </div>
-      ))}
+      )))}
     </section>
   );
 };
 
-interface BlogProp {
-  id?: number;
-  title: string;
-  name: string;
-  content: string;
-  authorid: string;
+interface HomeProps {
+  // id?: number;
+  // title: string;
+  // name: string;
+  // content: string;
+  // authorid: string;
 }
 
 export default Timeline;

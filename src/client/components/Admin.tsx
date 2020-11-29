@@ -3,16 +3,14 @@ import { useState, useEffect } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
 import { IBlogProps } from "../utils/types";
 
-const Admin: React.FC<IBlogProps> = (props: IBlogProps) => {
+const Admin: React.FC<IAdminProps> = (props: IAdminProps) => {
   const [blog, setBlog] = useState<IBlogProps>({
-    id: "",
+    id: 0,
     title: "",
     content: "",
-    authorid: "",
     name: "",
+    _created:0
   });
-  //   const [content, setContent] = useState({});
-  //   const [title, setTitle] = useState({});
 
   useEffect(() => {
     (async () => {
@@ -28,24 +26,26 @@ const Admin: React.FC<IBlogProps> = (props: IBlogProps) => {
       id: blog.id,
       title: blog.title,
       content: e.target.value,
-      authorid: blog.authorid,
       name: blog.name,
+      _created:blog._created
     });
 
-  const editBlog = async (id: string) => {
+  const editBlog = async (id: number, content:string) => {
     await fetch(`/api/blogs/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ content: blog.content }),
+      body: JSON.stringify({ content: content }),
     });
 
+    //"/"
     props.history.push("/");
   };
 
-  const deleteBlog = async (id: string) => {
-    await fetch(`/api/blogs/${id}`, {
+
+  const deleteBlog = async (id:number) => { 
+    await fetch(`/api/blogs/${props.match.params.id}`, {
       method: "DELETE",
     });
     props.history.push("/");
@@ -64,6 +64,7 @@ const Admin: React.FC<IBlogProps> = (props: IBlogProps) => {
                 Edit/Delete Blog Entry
               </h5>
               <h5>{blog.name}'s Entry</h5>
+              {blog.tags?.map((tag: { name: string }) => <span className="badge badge-pill badge-secondary">{tag.name}</span>)}
               <p></p>
               <p>{blog.title}</p>
               <textarea
@@ -74,13 +75,13 @@ const Admin: React.FC<IBlogProps> = (props: IBlogProps) => {
               <br></br>
               <button
                 className="btn btn-sm btn-outline-dark mx-2 rounded "
-                onClick={() => editBlog(blog.id)}
+                onClick={() => editBlog(blog.id, blog.content)}
               >
                 Save Edit
               </button>
               <button
                 className="btn btn-sm btn-outline-dark mx-2 rounded "
-                onClick={() => deleteBlog(props.match.params.id)}
+                onClick={() => deleteBlog(blog.id)}
               >
                 Delete Blog
               </button>
@@ -101,11 +102,6 @@ const Admin: React.FC<IBlogProps> = (props: IBlogProps) => {
   );
 };
 
-// export interface IAdminProps extends RouteComponentProps<{ id: string }> {
-//     title:string,
-//     content: string,
-//     authorid: number,
-
-// }
+export interface IAdminProps extends RouteComponentProps<{ id: string }> {}
 
 export default Admin;
